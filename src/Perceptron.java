@@ -1,27 +1,40 @@
+import java.util.ArrayList;
+
 public class Perceptron {
     double wantedAccuracy;
 
+    ArrayList<Double> vektorW= new ArrayList<>();
+    Data traingData = new Data("iristrain.csv", "setosa", "versicolor");
 
+    public Perceptron(){
+        for(int i=0;i<traingData.attributesSize;i++)
+            vektorW.add(1.0);
+    }
 
-/*
+    public boolean getOutput(Flower flower){
+        double sum=0;
+            for(int i=0; i<flower.attributes.size();i++)
+                sum+=flower.attributes.get(i)*vektorW.get(i);
+        if(sum>0)
+            return true;
+        return false;
+    }
 
-    public void learn(Flower flower, double wantedAccuracy){
-        double accuracy = 0.0;
-        int generation = 0;
-        while(accuracy < wantedAccuracy) {
-            int accurateCounter = 0;
-            for (Vector inputVector : inputVectors) {
-                int outputSignal = getOutputSignal(inputVector);
-                if(inputVector.getDecisionalAtributte() == outputSignal)
-                    accurateCounter++;
-                theta -= learningConstant * (inputVector.getDecisionalAtributte() - outputSignal);
-                weightVector.sumWithVector(inputVector.multiplyVector(learningConstant * (inputVector.getDecisionalAtributte() - outputSignal)));
+    public ArrayList<Double> correctVektor(ArrayList<Double> toCorrect){
+return null;
+    }
+
+    public void learn(){
+        boolean fine=true;
+        while(fine){
+
+            for(Flower flower: traingData.flowerList){
+                //if(!getOutput(flower))
+
             }
-            generation++;
-            accuracy = (double)accurateCounter/inputVectors.size();
-            System.out.println("Accuracy in " + generation +" generation: "+accuracy);
+
         }
     }
-    */
+
 
 }
