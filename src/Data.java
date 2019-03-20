@@ -13,7 +13,7 @@ public class Data {
         try {
             arrayData= Files.readAllLines((Paths.get(fileName)));
             attributesSize=arrayData.get(0).split(",").length-2;
-            System.out.println(attributesSize);
+           // System.out.println(attributesSize);
             arrayData.stream().forEach(x -> {
 
                 String[] tmpSplit= x.split(",");
@@ -25,9 +25,14 @@ public class Data {
                         tmpDoubleList.add(Double.parseDouble(tmpSplit[i]));
                   //  tmpDoubleList.stream().forEach(System.out::println);
                   //  System.out.println(tmpSplit[tmpSplit.length-1]);
+                    if(tmpSplit[tmpSplit.length-1].equals("\""+kind1+"\""))
                     flowerList.add(
-                            new Flower( tmpDoubleList, tmpSplit[tmpSplit.length-1])
+                            new Flower( tmpDoubleList,0 )
                     );
+                    else
+                        flowerList.add(
+                                new Flower( tmpDoubleList,1 )
+                        );
                 }
             });
 

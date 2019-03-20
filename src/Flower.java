@@ -2,18 +2,18 @@ import java.util.ArrayList;
 
 public class Flower {
     ArrayList<Double> attributes;
-    String flowerName;
+    int decisionalAtributte;
 
-    public Flower(ArrayList<Double> attributes, String flowerName) {
+    public Flower(ArrayList<Double> attributes, int decisionalAtributte) {
         this.attributes = attributes;
-        this.flowerName = flowerName;
+        this.decisionalAtributte = decisionalAtributte;
     }
 
     @Override
     public String toString() {
         return "Flower{" +
                 "attributes=" + attributes +
-                ", flowerName='" + flowerName + '\'' +
+                ", decisionalAtributte='" + decisionalAtributte + '\'' +
                 '}';
     }
 }
