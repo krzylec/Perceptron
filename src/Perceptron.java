@@ -1,67 +1,72 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Perceptron {
     int countpentla=0;
     double wantedAccuracy;
     double parameter=0.1;
+    double theta=0;
 
     ArrayList<Double> vektorW= new ArrayList<>();
-    Data traingData = new Data("iristrain.csv", "setosa", "versicolor");
+    Data traingData = new Data("iristrain.csv");
 
     public Perceptron(){
+
         for(int i=0;i<traingData.attributesSize;i++)
             vektorW.add(1.0);
+
     }
 
     public int getOutput(ArrayList<Double> toSum){
         double sum=0;
             for(int i=0; i<toSum.size();i++)
                 sum+=toSum.get(i)*vektorW.get(i);
-        if(sum>0)
+       // System.out.println("suma: "+sum);
+        if(sum-theta>0)
             return 1;
         return 0;
     }
 
     public void correctVektor(Flower flower){
-        countpentla++;
-        System.out.println("pentla: "+ countpentla);
-            int tmp= flower.decisionalAtributte-getOutput(flower.attributes);
-        System.out.println("roznica wynosi:"+ tmp);
-            ArrayList<Double> tmpAttributes= new ArrayList<>();
-            for(int i=0; i<flower.attributes.size();i++){
-               tmpAttributes.add(flower.attributes.get(i)*parameter*tmp);
+        double multiplier= parameter * ( flower.decisionalAtributte- getOutput(flower.attributes));
+        ArrayList<Double> tmpFlowerAtributes= flower.attributes;
+            for(Double attribute: tmpFlowerAtributes)
+                attribute += attribute*multiplier;
 
-            }
-        System.out.println("atrybuty przed mnozeniem");
-        tmpAttributes.stream().forEach(x -> System.out.print(x+ " "));
-        System.out.println();
             for(int i=0; i<vektorW.size();i++){
-                vektorW.set(i, vektorW.get(i)+tmpAttributes.get(i));
+                vektorW.set(i,tmpFlowerAtributes.get(i));
             }
-
-            vektorW.stream().forEach(x -> System.out.print(x+ " "));
-        System.out.println();
-
     }
 
-    public void learn(){
-        boolean fine=true;
+    public void learn( double wantedAccuracy){
         double accuracy=0;
-        int accuracyCount=0;
-        while(accuracy<90){
-            accuracy=0;
-            for(Flower flower: traingData.flowerList){
-                if(flower.decisionalAtributte==getOutput(flower.attributes)){
-                    accuracyCount++;
+        int generaction=0;
+
+        while(accuracy<wantedAccuracy){
+            int tmpAccuracy=0;
+            for(Flower inputFlower: traingData.flowerList){
+
+                if(inputFlower.decisionalAtributte == getOutput(inputFlower.attributes)){
+                    tmpAccuracy++;
+                 //   System.out.println("dodaje tmp");
                 }
-                correctVektor(flower);
+                else {
+                  //  System.out.println("zmienia thete i zmienia wektor");
+                    theta -= parameter * (inputFlower.decisionalAtributte - getOutput((inputFlower.attributes)));
+                    correctVektor(inputFlower);
+                }
 
             }
-
-            accuracy=(double)accuracyCount/(double)traingData.flowerList.size()*100;
-            System.out.println("accuracy: "+ accuracy);
+            generaction++;
+            accuracy = (double)tmpAccuracy/traingData.flowerList.size()*100;
+           // System.out.println(tmpAccuracy+ "   " +traingData.flowerList.size());
+            System.out.println("generacja: "+generaction+" z dokladnoscia: "+ accuracy);
         }
+
     }
+
+
+
 
 
 }

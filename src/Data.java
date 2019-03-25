@@ -8,8 +8,10 @@ public class Data {
     public List<String> arrayData;
     public ArrayList<Flower> flowerList= new ArrayList<>();
     public int attributesSize;
+    String kind1="setosa";
+    String kind2="versicolor";
 
-    public Data(String fileName, String kind1, String kind2){
+    public Data(String fileName){
         try {
             arrayData= Files.readAllLines((Paths.get(fileName)));
             attributesSize=arrayData.get(0).split(",").length-2;
