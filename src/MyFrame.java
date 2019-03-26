@@ -133,7 +133,15 @@ public class MyFrame extends JFrame {
             }
             catch(Exception exc){
                 //System.out.println("podaj poprawne dane!");
-                lblNewLabel.setText("podaj poprawne dane!");
+                lblNewLabel.setText("Dane nie pelne, wczytywane sa dane z pliku testowego");
+                Data testData= new Data("iristest.csv");
+
+                for(Flower testFlower: testData.flowerList){
+                    if(perceptron.getOutput(testFlower.attributes)==0)
+                        System.out.println(testFlower+ " classified to setosa");
+                    else
+                        System.out.println(testFlower+" classified to versicolor");
+                }
             }
 
 
