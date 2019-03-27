@@ -26,7 +26,6 @@ public class MyFrame extends JFrame {
     private JButton btnNewButton_1;
     private JLabel lblNewLabel_1;
 
-    Double[] filled = new Double[4];
 
     public MyFrame(){
 
@@ -82,24 +81,10 @@ public class MyFrame extends JFrame {
         panel_3.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
         textField = new JTextField();
-        panel_3.add(new JLabel("Sepal.L:"));
+        panel_3.add(new JLabel("ATTRIBUTES"));
         panel_3.add(textField);
-        textField.setColumns(5);
+        textField.setColumns(35);
 
-        textField_1 = new JTextField();
-        panel_3.add(new JLabel("Sepal.W:"));
-        panel_3.add(textField_1);
-        textField_1.setColumns(5);
-
-        textField_2 = new JTextField();
-        panel_3.add(new JLabel("Petal.L:"));
-        panel_3.add(textField_2);
-        textField_2.setColumns(5);
-
-        textField_3 = new JTextField();
-        panel_3.add(new JLabel("Sepal.W:"));
-        panel_3.add(textField_3);
-        textField_3.setColumns(5);
 
         textField_4 = new JTextField();
         panel_3.add(new JLabel("ACCURACY:"));
@@ -115,14 +100,11 @@ public class MyFrame extends JFrame {
         btnNewButton = new JButton("TEST");
         btnNewButton.addActionListener(e -> {
             try {
-                filled[0] = Double.parseDouble(textField.getText());
-                filled[1] = Double.parseDouble(textField_1.getText());
-                filled[2] = Double.parseDouble(textField_2.getText());
-                filled[3] = Double.parseDouble(textField_3.getText());
-
+                String[] splitedText=textField.getText().split(":");
                 ArrayList<Double> tmplist= new ArrayList<>();
-                for(double d: filled)
-                    tmplist.add(d);
+                for(int i=0; i<splitedText.length;i++)
+                    tmplist.add(Double.parseDouble(splitedText[i]));
+
 
                 perceptron.getOutput(tmplist);
 
