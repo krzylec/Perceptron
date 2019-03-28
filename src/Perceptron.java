@@ -6,7 +6,7 @@ public class Perceptron {
     double wantedAccuracy;
     double parameter=0.1;
     double theta=0;
-
+    double accuracy;
 
     ArrayList<Double> vektorW= new ArrayList<>();
     Data traingData = new Data("iristrain.csv");
@@ -43,7 +43,7 @@ public class Perceptron {
     }
 
     public void learn( double wantedAccuracy){
-        double accuracy=0;
+        accuracy=0;
         int generaction=0;
 
         while(accuracy<wantedAccuracy){
@@ -65,7 +65,7 @@ public class Perceptron {
             accuracy = (double)tmpAccuracy/traingData.flowerList.size()*100;
             System.out.println(vektorW);
            // System.out.println(tmpAccuracy+ "   " +traingData.flowerList.size());
-           System.out.println("generacja: "+generaction+" z dokladnoscia: "+ accuracy);
+        //   System.out.println("generacja: "+generaction+" z dokladnoscia: "+ accuracy);
         }
 
     }

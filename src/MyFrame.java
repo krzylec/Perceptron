@@ -14,10 +14,7 @@ public class MyFrame extends JFrame {
     private JPanel panel_4;
     private JPanel panel_5;
     private JTextField textField;
-    private JTextField textField_1;
-    private JTextField textField_2;
-    private JTextField textField_3;
-    private JTextField textField_4;
+
 
     private JPanel panelL1;
     private JPanel panelL2;
@@ -46,16 +43,18 @@ public class MyFrame extends JFrame {
         panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 
-        btnNewButton_1 = new JButton("SET ACCURACY");
+        btnNewButton_1 = new JButton("START");
 
         btnNewButton_1.addActionListener(e -> {
 
 
                 try{
-                    Integer.parseInt(textField_4.getText());
-                    lblNewLabel_1.setText("ACCURACY SET TO "+ textField_4.getText());
+                    perceptron.learn(100);
 
-                    perceptron.learn(Double.parseDouble(textField_4.getText()));
+                    lblNewLabel_1.setText("ACCURACY: "+ perceptron.accuracy+"%");
+
+
+
 
                 }
                 catch(Exception ex){
@@ -85,12 +84,12 @@ public class MyFrame extends JFrame {
         panel_3.add(textField);
         textField.setColumns(35);
 
-
+/*
         textField_4 = new JTextField();
         panel_3.add(new JLabel("ACCURACY:"));
         panel_3.add(textField_4);
         textField_4.setColumns(5);
-
+*/
         contentPane.add(panel_3);
         //========================================================================
 
@@ -115,7 +114,7 @@ public class MyFrame extends JFrame {
             }
             catch(Exception exc){
                 //System.out.println("podaj poprawne dane!");
-                lblNewLabel.setText("Dane nie pelne, wczytywane sa dane z pliku testowego");
+                lblNewLabel.setText("Dane nie wprowadzone, wczytywane sa dane z pliku testowego");
                 Data testData= new Data("iristest.csv");
 
                 for(Flower testFlower: testData.flowerList){
