@@ -7,6 +7,7 @@ public class Perceptron {
     double parameter=0.1;
     double theta=0;
 
+
     ArrayList<Double> vektorW= new ArrayList<>();
     Data traingData = new Data("iristrain.csv");
 
@@ -30,11 +31,14 @@ public class Perceptron {
     public void correctVektor(Flower flower){
         double multiplier= parameter * ( flower.decisionalAtributte- getOutput(flower.attributes));
         ArrayList<Double> tmpFlowerAtributes= flower.attributes;
-            for(Double attribute: tmpFlowerAtributes)
-                attribute += attribute*multiplier;
+
+        for(int i=0; i<tmpFlowerAtributes.size();i++){
+            tmpFlowerAtributes.set(i, tmpFlowerAtributes.get(i)*multiplier);
+        }
+
 
             for(int i=0; i<vektorW.size();i++){
-                vektorW.set(i,tmpFlowerAtributes.get(i));
+                vektorW.set(i,vektorW.get(i)+tmpFlowerAtributes.get(i));
             }
     }
 
@@ -59,8 +63,9 @@ public class Perceptron {
             }
             generaction++;
             accuracy = (double)tmpAccuracy/traingData.flowerList.size()*100;
+            System.out.println(vektorW);
            // System.out.println(tmpAccuracy+ "   " +traingData.flowerList.size());
-            System.out.println("generacja: "+generaction+" z dokladnoscia: "+ accuracy);
+           System.out.println("generacja: "+generaction+" z dokladnoscia: "+ accuracy);
         }
 
     }

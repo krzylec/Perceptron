@@ -35,7 +35,7 @@ public class MyFrame extends JFrame {
         setTitle("perceptron");
         setBounds(100, 100, 480, 300);
         contentPane = new JPanel();
-        contentPane.setBackground(new Color(255, 195, 130));
+        contentPane.setBackground(new Color(187, 220, 255));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
