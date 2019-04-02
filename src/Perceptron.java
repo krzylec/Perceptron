@@ -42,7 +42,7 @@ public class Perceptron {
         accuracy=0;
         int generaction=0;
 
-        while(accuracy<=100){
+        while(accuracy<100){
             int tmpAccuracy=0;
             for(Vector inputVector : traingData.vectorList){
 
