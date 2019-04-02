@@ -2,7 +2,6 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class MyFrame extends JFrame {
     private Perceptron perceptron= new Perceptron();
@@ -49,7 +48,7 @@ public class MyFrame extends JFrame {
 
 
                 try{
-                    perceptron.learn(100);
+                    perceptron.learn();
 
                     lblNewLabel_1.setText("ACCURACY: "+ perceptron.accuracy+"%");
 
@@ -117,11 +116,11 @@ public class MyFrame extends JFrame {
                 lblNewLabel.setText("Dane nie wprowadzone, wczytywane sa dane z pliku testowego");
                 Data testData= new Data("iristest.csv");
 
-                for(Flower testFlower: testData.flowerList){
-                    if(perceptron.getOutput(testFlower.attributes)==0)
-                        System.out.println(testFlower+ " classified to setosa");
+                for(Vector testVector : testData.vectorList){
+                    if(perceptron.getOutput(testVector.attributes)==0)
+                        System.out.println(testVector + " classified to setosa");
                     else
-                        System.out.println(testFlower+" classified to versicolor");
+                        System.out.println(testVector +" classified to versicolor");
                 }
             }
 
